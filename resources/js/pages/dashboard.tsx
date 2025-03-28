@@ -67,15 +67,38 @@ export default function Dashboard({ completedTasks, incompleteTasks }: {complete
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 <div className={"flex gap-2 w-full"}>
-                    <div onDrop={onCompleteDrop} onDragOver={onCompleteDragOver} className={"bg-slate-800 rounded-md w-1/2 p-2"}>
+                    <div onDrop={onIncompleteDrop} onDragOver={onIncompleteDragOver}
+                         className={'bg-slate-900 rounded-md w-1/2 p-2'}>
                         <h2 className={"font-bold text-lg"}>
-                            Completed
+                            In-complete ({ incompleteTasks.length })
+                        </h2>
+                        <ul className={'list-decimal list-inside space-y-2 mt-4'}>
+                            {incompleteTasks.map(task => (
+                                <Task
+                                    draggable={true}
+                                    onDragStart={() => onDragStart(task, 'incomplete')}
+                                    task={task}
+                                    key={task.id}
+                                />
+                            ))}
+                            {
+                                draggingTask && currentState === 'incomplete' && draggedFromState !== 'incomplete'
+                                    ? <Task task={draggingTask} />
+                                    : ''
+                            }
+                        </ul>
+                    </div>
+
+                    <div onDrop={onCompleteDrop} onDragOver={onCompleteDragOver}
+                         className={"bg-slate-900 rounded-md w-1/2 p-2"}>
+                        <h2 className={"font-bold text-lg"}>
+                            Completed ({ completedTasks.length })
                         </h2>
                         <ul className={'list-decimal list-inside space-y-2 mt-4'}>
                             {completedTasks.map(task => (
                                 <Task
                                     draggable={true}
-                                    onDragStart={ () => onDragStart(task, 'complete') }
+                                    onDragStart={() => onDragStart(task, 'complete')}
                                     task={task}
                                     key={task.id}
                                 />
@@ -83,27 +106,6 @@ export default function Dashboard({ completedTasks, incompleteTasks }: {complete
 
                             {
                                 draggingTask && currentState === 'complete' && draggedFromState !== 'complete'
-                                    ? <Task task={draggingTask} />
-                                    : ''
-                            }
-                        </ul>
-                    </div>
-
-                    <div onDrop={onIncompleteDrop} onDragOver={onIncompleteDragOver} className={'bg-slate-800 rounded-md w-1/2 p-2'}>
-                        <h2 className={"font-bold text-lg"}>
-                            In-complete
-                        </h2>
-                        <ul className={'list-decimal list-inside space-y-2 mt-4'}>
-                            {incompleteTasks.map(task => (
-                                <Task
-                                    draggable={true}
-                                    onDragStart={ () => onDragStart(task, 'incomplete') }
-                                    task={task}
-                                    key={task.id}
-                                />
-                            ))}
-                            {
-                                draggingTask && currentState === 'incomplete' && draggedFromState !== 'incomplete'
                                     ? <Task task={draggingTask} />
                                     : ''
                             }

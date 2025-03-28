@@ -15,7 +15,7 @@ export default function Task({
 
     return (
         <div
-            className="p-2 rounded-md bg-slate-700 flex items-center justify-between px-4"
+            className="p-2 rounded-md bg-slate-800 flex items-center justify-between px-4"
             draggable={draggable}
             onDragStart={onDragStart}
         >
