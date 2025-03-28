@@ -18,7 +18,7 @@ export default function Task({
 
     const [showInput, setShowInput] = useState<boolean>(false)
 
-    const { data, setData, errors, put, processing} = useForm({
+    const { data, setData, put, processing} = useForm({
         description: task.description
     });
 
