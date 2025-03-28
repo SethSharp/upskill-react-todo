@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Task;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,12 +18,12 @@ class DatabaseSeeder extends Seeder
 
         $user->tasks()->create([
             'description' => 'Brush your teeth',
-            'completed' => false,
+            'status' => Task::STATUS_COMPLETED,
         ]);
 
         $user->tasks()->create([
             'description' => 'Check emails',
-            'completed' => false,
+            'status' => Task::STATUS_NOT_COMPLETED,
         ]);
     }
 }

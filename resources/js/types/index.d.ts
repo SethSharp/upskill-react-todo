@@ -41,8 +41,13 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
+enum Status {
+    COMPLETED = 'completed',
+    NOT_COMPLETED = 'not_completed',
+}
+
 export interface TaskData {
     id: number;
     description: string;
-    completed: boolean
+    status: Status
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Task;
 use Inertia\Response;
+use App\Enums\TaskStatus;
 
 class DashboardController extends Controller
 {
@@ -13,8 +15,8 @@ class DashboardController extends Controller
         $user = auth()->user();
 
         return inertia('dashboard', [
-            'completedTasks' => $user->tasks()->where('completed', true)->get(),
-            'incompleteTasks' => $user->tasks()->where('completed', false)->get(),
+            'completedTasks' => $user->tasks()->where('status', TaskStatus::STATUS_COMPLETED)->get(),
+            'incompleteTasks' => $user->tasks()->where('status', TaskStatus::STATUS_NOT_COMPLETED)->get(),
         ]);
     }
 }

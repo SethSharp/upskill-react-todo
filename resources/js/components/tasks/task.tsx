@@ -1,5 +1,5 @@
-import { TaskData } from '@/types'
-import { Circle } from 'lucide-react'
+import { type TaskData } from '@/types';
+import { Circle } from 'lucide-react';
 
 export default function Task({
     task,
@@ -11,7 +11,7 @@ export default function Task({
     draggable?: boolean,
     onDragStart?: (event: React.DragEvent<HTMLDivElement>) => void,
 }) {
-    const classes = `fill-current ${task.completed ? "text-green-500" : "text-red-500"}`
+    const classes = `fill-current ${task.status === 'completed' ? "text-green-500" : "text-red-500"}`
 
     return (
         <div

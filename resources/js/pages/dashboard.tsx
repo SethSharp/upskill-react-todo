@@ -1,5 +1,5 @@
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem, TaskData } from '@/types';
+import { type BreadcrumbItem, type TaskData } from '@/types';
 import { Head, router } from '@inertiajs/react';
 import Task from '@/components/tasks/task';
 import { useState } from 'react';
@@ -13,8 +13,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 /**
  * todo:
- * 1. Change endpoint to tasks.state.update (change column name to state)
- * 2. Create / Update endpoint (the description
+ * 1. Create / Update endpoint (the description)
  */
 
 export default function Dashboard({ completedTasks, incompleteTasks }: {completedTasks: TaskData[], incompleteTasks: TaskData[]}) {
@@ -39,9 +38,9 @@ export default function Dashboard({ completedTasks, incompleteTasks }: {complete
 
     const onIncompleteDrop = (event: React.DragEvent) => {
         event.preventDefault()
-        router.put(route('tasks.update', {
+        router.put(route('tasks.status.update', {
             task: draggingTask?.id,
-            completed: false,
+            status: 'not_completed',
         }), {}, {
             onFinish: () => {
                 setDraggingTask(null)
@@ -51,12 +50,11 @@ export default function Dashboard({ completedTasks, incompleteTasks }: {complete
 
     const onCompleteDrop = (event: React.DragEvent) => {
         event.preventDefault()
-        router.put(route('tasks.update', {
+        router.put(route('tasks.status.update', {
             task: draggingTask?.id,
-            completed: true,
+            status: 'completed',
         }), {}, {
             onFinish: () => {
-                console.log('finished')
                 setDraggingTask(null)
             }
         })
