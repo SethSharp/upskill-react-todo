@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('description');
-            $table->boolean('status')->default(\App\Models\Task::STATUS_NOT_COMPLETED);
+            $table->boolean('status')->default(\App\Enums\TaskStatus::STATUS_NOT_COMPLETED);
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Task;
+use App\Enums\TaskStatus;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,12 +19,12 @@ class DatabaseSeeder extends Seeder
 
         $user->tasks()->create([
             'description' => 'Brush your teeth',
-            'status' => Task::STATUS_COMPLETED,
+            'status' => TaskStatus::STATUS_COMPLETED,
         ]);
 
         $user->tasks()->create([
             'description' => 'Check emails',
-            'status' => Task::STATUS_NOT_COMPLETED,
+            'status' => TaskStatus::STATUS_NOT_COMPLETED,
         ]);
     }
 }
