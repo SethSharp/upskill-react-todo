@@ -2,7 +2,7 @@ import { type TaskData } from '@/types';
 import { Circle } from 'lucide-react';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { useForm } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 
 export default function Task({
@@ -37,6 +37,16 @@ export default function Task({
         })
     }
 
+    const deleteTask = () => {
+        router.delete(route('tasks.delete', {
+            task: task.id
+        }), {
+            onSuccess: () => {
+                setShowInput(false)
+            }
+        })
+    }
+
     return (
         <div>
             {! showInput ?
@@ -61,7 +71,8 @@ export default function Task({
                             placeholder="Description"
                         />
                         <div className={"w-full flex justify-end gap-2 mt-4"}>
-                            <Button onClick={() => setShowInput(false)} size="sm" variant="secondary">Cancel</Button>
+                            <Button type={"button"} onClick={() => deleteTask()} size="sm" variant="destructive">Delete</Button>
+                            <Button type={"button"} onClick={() => setShowInput(false)} size="sm" variant="secondary">Cancel</Button>
                             <Button size="sm" disabled={processing}>Update</Button>
                         </div>
                     </form>

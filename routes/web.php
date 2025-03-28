@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/create', \App\Http\Controllers\Tasks\CreateTaskController::class)->name('show');
         Route::post('/store', \App\Http\Controllers\Tasks\StoreTaskController::class)->name('store');
         Route::put('/{task}/update', \App\Http\Controllers\Tasks\UpdateTaskController::class)->name('update');
+        Route::delete('/{task}/delete', \App\Http\Controllers\Tasks\DeleteTaskController::class)->name('delete');
 
         Route::put('/{task}/update-status', \App\Http\Controllers\Tasks\UpdateTaskStatusController::class)->name('status.update');
     });
