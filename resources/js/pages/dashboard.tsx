@@ -13,17 +13,18 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 /**
  * todo:
- * 1. Do no show dragging task if in the same state
- * 2. Change endpooint to update state (change column name to state)
- * 3. Create / Update endpoint (the description
+ * 1. Change endpoint to tasks.state.update (change column name to state)
+ * 2. Create / Update endpoint (the description
  */
 
 export default function Dashboard({ completedTasks, incompleteTasks }: {completedTasks: TaskData[], incompleteTasks: TaskData[]}) {
     const [draggingTask, setDraggingTask] = useState<TaskData | null>(null);
     const [currentState, setCurrentState] = useState<string | null>(null);
+    const [draggedFromState, setDraggedFromState] = useState<string | null>(null);
 
     const onDragStart = (task: TaskData, state: string) => {
         setDraggingTask(task);
+        setDraggedFromState(state);
     }
 
     const onCompleteDragOver = (event: React.DragEvent) => {
@@ -81,7 +82,7 @@ export default function Dashboard({ completedTasks, incompleteTasks }: {complete
                             ))}
 
                             {
-                                draggingTask && currentState === 'complete'
+                                draggingTask && currentState === 'complete' && draggedFromState !== 'complete'
                                     ? <Task task={draggingTask} />
                                     : ''
                             }
@@ -102,7 +103,7 @@ export default function Dashboard({ completedTasks, incompleteTasks }: {complete
                                 />
                             ))}
                             {
-                                draggingTask && currentState === 'incomplete'
+                                draggingTask && currentState === 'incomplete' && draggedFromState !== 'incomplete'
                                     ? <Task task={draggingTask} />
                                     : ''
                             }
