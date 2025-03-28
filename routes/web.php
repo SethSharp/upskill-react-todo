@@ -11,6 +11,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', \App\Http\Controllers\DashboardController::class)->name('dashboard');
 
     Route::prefix('/tasks')->name('tasks.')->group(function () {
+        Route::get('/create', \App\Http\Controllers\Tasks\CreateTaskController::class)->name('show');
+        Route::post('/store', \App\Http\Controllers\Tasks\StoreTaskController::class)->name('store');
+        Route::put('/{task}/update', \App\Http\Controllers\Tasks\UpdateTaskController::class)->name('update');
+
         Route::put('/{task}/update-status', \App\Http\Controllers\Tasks\UpdateTaskStatusController::class)->name('status.update');
     });
 });

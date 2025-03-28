@@ -11,11 +11,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-/**
- * todo:
- * 1. Create / Update endpoint (the description)
- */
-
 export default function Dashboard({ completedTasks, incompleteTasks }: {completedTasks: TaskData[], incompleteTasks: TaskData[]}) {
     const [draggingTask, setDraggingTask] = useState<TaskData | null>(null);
     const [currentState, setCurrentState] = useState<string | null>(null);
